@@ -19,13 +19,14 @@ class BotsController < ApplicationController
       speech = "I recorded $" + transaction.amount.to_s + " spent on " + transaction.subcategory + " under " + transaction.category + "."
       display_text = speech
     when "get_finance_info"
-      subcategory = params[:result][:parameters][:category]
+      subcategory = params[:result][:parameters]["category-original"]
       date_period = params[:result][:parameters]["date-period"]
       
       if Transaction.where(subcategory: subcategory).nil?
         speech = "You haven't spent anything in " + subcategory + "."
       else
-        category = Transaction.where(subcategory: subcategory).last.category
+        category = params[:result][:parameters]["category"]
+
         subcategory_amount = Transaction.where(subcategory: subcategory).sum(:amount)
         category_amount = Transaction.where(category: category).sum(:amount)
         speech = "You've spent $" + subcategory_amount.to_s + " on " + subcategory + " and " + category_amount.to_s + " on " + category + "."
