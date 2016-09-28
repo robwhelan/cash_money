@@ -29,7 +29,7 @@ class BotsController < ApplicationController
 
         subcategory_amount = Transaction.where(subcategory: subcategory).sum(:amount)
         category_amount = Transaction.where(category: category).sum(:amount)
-        speech = "You've spent $" + subcategory_amount.to_s + " on " + subcategory + " and " + category_amount.to_s + " on " + category + "."
+        speech = "You've spent $" + subcategory_amount.to_s + " on " + subcategory + " and $" + category_amount.to_s + " on " + category + "."
       end
       
       display_text = speech
