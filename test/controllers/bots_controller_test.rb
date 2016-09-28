@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BotControllerTest < ActionController::TestCase
+class BotsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
