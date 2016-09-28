@@ -1,15 +1,28 @@
 class BotsController < ApplicationController
 
   def api_ai_webhook
-    puts "hey I just got a webhook"
-    my_hash = JSON.parse('{
-        "speech": "Barack Hussein Obama II is the 44th and current President of the United States.",
-        "displayText": "Barack Hussein Obama II is the 44th and current President of the United States, and the first African American to hold the office. Born in Honolulu, Hawaii, Obama is a graduate of Columbia University   and Harvard Law School, where ",
-        "data": {},
-        "contextOut": [],
-        "source": "Rails app"
-      }')
-    render json: my_hash
+    
+    action = params[:result][:action]
+    case action
+    when "record_transaction"
+      puts "need to record a transaction"
+      speech = "record yer transaction"
+      display_text = speech
+    when "get_finance_info"
+      puts "get finance info"
+      speech = "get yer finance info"
+      display_text = speech
+    end
+    
+    my_hash = {
+      speech: speech,
+      displayText: display_text,
+      data: {},
+      contextOut: [],
+      source: "Rails App"
+    }
+    
+    render json: my_hash.to_json
   end
 
 end
