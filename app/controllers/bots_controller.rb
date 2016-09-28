@@ -16,7 +16,7 @@ class BotsController < ApplicationController
         category: category
         )
       
-      speech = "I recorded $" + transaction.amount + " spent on " + transaction.subcategory + "."
+      speech = "I recorded $" + transaction.amount.to_s + " spent on " + transaction.subcategory + "."
       display_text = speech
     when "get_finance_info"
       puts "get finance info"
